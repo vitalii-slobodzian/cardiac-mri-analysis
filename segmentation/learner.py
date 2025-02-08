@@ -1,20 +1,32 @@
-from fastai_segmentation.utils import *
-from fastai.vision.all import ImageBlock, MaskBlock, get_image_files, resnet34, resnet50
+import datetime
+import os
+from helpers import *
+from fastai.vision.all import Resize, ImageBlock, MaskBlock, get_image_files, resnet50, resnet34, resnet18
 from fastai.data.block import DataBlock
 from fastai.vision.learner import unet_learner
 from fastai.data.transforms import RandomSplitter
 
-def get_y_bssfp(file_path):
-    return str(file_path).replace('bssfp', 'masks')
+def get_y(file_path):
+    return str(file_path).replace('images', 'masks')
+
+Architectures = {
+    "resnet50": resnet50,
+    "resnet34": resnet34,
+    "resnet18": resnet18
+}
 
 class Learner():
     def __init__(self, config):
         self.config = config
 
-    def learn(self, loss_function, transforms):
+    def learn(self, loss_function=None, transforms=None):
         classes = self.config['classes']
+
+        if transforms is None:
+            transforms = [CutToSquare(), Resize(self.config['size'])]
+
         data_block = DataBlock(
-            blocks=(ImageBlock,  MaskBlock(codes=classes)),
+            blocks=(ImageBlock, MaskBlock(codes=classes)),
             get_items=get_image_files,
             get_y=get_y,
             splitter=RandomSplitter(),
@@ -26,12 +38,18 @@ class Learner():
 
         dataloaders = data_block.dataloaders(
             self.config['dataset_path'],
-            bs = self.config['batch_size'],
-            num_workers = self.config['num_workers']
+            bs=self.config['batch_size'],
+            num_workers=self.config['num_workers']
         )
+
+        if self.config['architecture'] is not None:
+            architecture = Architectures[self.config['architecture']]
+        else:
+            architecture = resnet50
+
         learn = unet_learner(
             dataloaders,
-            resnet34,
+            architecture,
             loss_func=loss_function,
             metrics=metrics
         )

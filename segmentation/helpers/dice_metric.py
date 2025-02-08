@@ -1,6 +1,6 @@
 import torch
 from torch import Tensor
-from fastai.vision.all import Tensor, ItemTransform, PILImage, PILMask
+from fastai.vision.all import Tensor
 
 class DiceMetric():
     def __init__(self, dice_smooth: float):
@@ -33,6 +33,3 @@ class DiceMetric():
     def class_8(self, input, targs): return self.multi_dice(input, targs, class_id=8)
     def class_9(self, input, targs): return self.multi_dice(input, targs, class_id=9)
 
-
-def get_y(file_path):
-    return str(file_path).replace('images', 'masks')

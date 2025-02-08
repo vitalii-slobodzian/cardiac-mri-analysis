@@ -64,10 +64,15 @@ def get_mask_bounding_box(mask, expansion_percent = 0.0, square=True):
         int(height + expansion_col_number * 2)
     )
 
-def normalize_image(image_array):
-    min_value = np.min(image_array)
-    max_value = np.max(image_array)
-    return (image_array - min_value) / (max_value - min_value)
+def normalize_image(image_array, min_value=None, max_value=None):
+    if min_value is None:
+        min_value = np.min(image_array)
+    if max_value is None:
+        max_value = np.max(image_array)
+
+    image_array[image_array < min_value] = min_value
+    image_array[image_array > max_value] = max_value
+    return ((image_array - min_value) / (max_value - min_value)) * 255
 
 def remap_mask(mask_array, original_classes, target_classes):
     assert len(original_classes) == len(target_classes), 'List of target and original classes should have the same length'
@@ -145,11 +150,3 @@ def show_image(
     axs.set_title(title)
     axs.imshow(image_array, cmap=cmap)
     plt.show()
-
-class CutToSquare(ItemTransform):
-    def encodes(self, x):
-        if isinstance(x, (list, tuple, dict, set)) and len(x) > 1:
-            image, mask = x
-            return PILImage.create(image), PILMask.create(mask)
-        else:
-            return x
