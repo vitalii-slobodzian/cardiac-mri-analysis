@@ -168,8 +168,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 
-- **Principal Investigator**: [Your Name](mailto:your.email@institution.edu)
-- **Project Website**: [Project Homepage](https://your-project-website.com)
+- **Principal Investigator**: [Vitalii Slobodzian](mailto:vitalii.slobodzian@gmail.com)
 - **GitHub Issues**: For technical questions and support
 
 ---
