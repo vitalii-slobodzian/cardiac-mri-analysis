@@ -68,7 +68,7 @@ Instead of a single model, we use a sequence of six deep learning models to firs
 
 To overcome class confusion common in multi-class medical classification, we designed a cascade of binary classifiers. This model first separates healthy from pathological cases and then progressively narrows down the specific diagnosis, leading to higher overall accuracy.
 
-<img src="https://raw.githubusercontent.com/vitalii-slobodzian/cardiac-mri-analysis/refs/heads/develop/img/fig_3.png" alt="Cascade Classification Model" width="1000"/>
+<img src="https://raw.githubusercontent.com/vitalii-slobodzian/cardiac-mri-analysis/refs/heads/develop/img/fig_3.png" alt="Cascade Classification Model" width="800"/>
 
 *(Caption: The structure of our cascade classification model, which breaks down a five-class problem into a series of simpler binary classification tasks.)*
 
