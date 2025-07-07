@@ -7,11 +7,13 @@
 
 This repository contains the official implementation for the paper **"Explainable Deep Learning for Cardiac MRI: Multi-Stage Segmentation, Cascade Classification, and Visual Interpretation"**. Our work introduces a complete framework for automated, accurate, and transparent analysis of cardiac MRI scans, bridging the gap between advanced deep learning models and clinical interpretability.
 
-![Overall Method Chart](https://raw.githubusercontent.com/vitalii-slobodzian/cardiac-mri-analysis/main/assets/readme_fig_1.png)
+![Overall Method Chart](https://raw.githubusercontent.com/vitalii-slobodzian/cardiac-mri-analysis/refs/heads/develop/img/fig_1.png)
+*(Caption: The proposed task decomposition for cardiac MRI processing, illustrating the process flow from input MRI scans through three sequential processing stages—segmentation, classification, and interpretation.)*
 
 ---
 
 ## Table of Contents
+
 - [Overview](#overview)
 - [Key Features](#key-features)
 - [Our Methodology](#our-methodology)
@@ -53,26 +55,28 @@ Our framework decomposes the complex task of cardiac analysis into three managea
 
 ### 1. Multi-Stage Segmentation
 
-Instead of a single model, we use a sequence of six deep learning models to first **localize** the cardiac structures and then perform fine-grained **segmentation**. This hierarchical approach allows the models to focus on relevant regions, significantly improving accuracy, especially for challenging structures like the RV and in apical/basal slices.
+Instead of a single model, we use a sequence of six deep learning models to first **localize** the cardiac structures and then perform fine-grained **segmentation**. This hierarchical approach allows the models to focus on relevant regions, significantly improving accuracy. In many cases, our model provided more precise segmentations than the original expert annotations, correctly identifying or excluding regions that were mislabeled.
 
-| Original MRI | Expert Mask | Our Method's Mask |
+| Expert-Provided Mask | Our Method's Generated Mask | Difference Map |
 |:---:|:---:|:---:|
-| ![Original MRI](https://raw.githubusercontent.com/vitalii-slobodzian/cardiac-mri-analysis/main/assets/readme_seg_1.png) | ![Expert Mask](https://raw.githubusercontent.com/vitalii-slobodzian/cardiac-mri-analysis/main/assets/readme_seg_2.png) | ![Our Mask](https://raw.githubusercontent.com/vitalii-slobodzian/cardiac-mri-analysis/main/assets/readme_seg_3.png) |
-*A visual comparison showing the high fidelity of our segmentation output against the expert-annotated ground truth.*
+| ![Expert Mask](https://raw.githubusercontent.com/vitalii-slobodzian/cardiac-mri-analysis/develop/img/fig_2a.png) | ![Generated Mask](https://raw.githubusercontent.com/vitalii-slobodzian/cardiac-mri-analysis/develop/img/fig_2b.png) | ![Difference Map](https://raw.githubusercontent.com/vitalii-slobodzian/cardiac-mri-analysis/develop/img/fig_2c.png) |
+| **(a)** | **(b)** | **(c)** |
+
+*(Caption: A visual comparison showcasing the expert-provided mask (a), our method’s generated mask (b), and a difference map (c). This example highlights cases where our model corrected inaccuracies present in the original ground truth.)*
 
 ### 2. Cascade Classification
 
 To overcome class confusion common in multi-class medical classification, we designed a cascade of binary classifiers. This model first separates healthy from pathological cases and then progressively narrows down the specific diagnosis, leading to higher overall accuracy.
 
-![Cascade Classification Diagram](https://raw.githubusercontent.com/vitalii-slobodzian/cardiac-mri-analysis/main/assets/readme_fig_2.png)
-*Structure of the cascade classification model.*
+![Cascade Classification Model](https://raw.githubusercontent.com/vitalii-slobodzian/cardiac-mri-analysis/refs/heads/develop/img/fig_3.png)
+*(Caption: The structure of our cascade classification model, which breaks down a five-class problem into a series of simpler binary classification tasks.)*
 
 ### 3. Visual Interpretation
 
 The final and most critical stage is making the results understandable. Our interpretation module takes the segmentation and classification outputs and calculates clinically established metrics. These are presented in a comprehensive dashboard, providing a clear, quantitative, and visual summary to support a clinician's final diagnosis.
 
-![DCM Interpretation](https://raw.githubusercontent.com/vitalii-slobodzian/cardiac-mri-analysis/main/assets/readme_fig_3.png)
-*Example of the final interpretation output for a patient with Dilated Cardiomyopathy (DCM), showing key metrics and a 17-segment model of myocardial wall thickness.*
+![DCM Interpretation](https://raw.githubusercontent.com/vitalii-slobodzian/cardiac-mri-analysis/refs/heads/develop/img/fig_4.png)
+*(Caption: Example of the final interpretation output for a patient with Dilated Cardiomyopathy (DCM), showing key metrics and a 17-segment model of myocardial wall thickness.)*
 
 ---
 
@@ -81,6 +85,7 @@ The final and most critical stage is making the results understandable. Our inte
 Our methods set a new standard for accuracy on the ACDC dataset.
 
 **Segmentation Performance (Dice Coefficient):**
+
 | Phase | Left Ventricle (LV) | Right Ventricle (RV) | Myocardium (Myo) |
 |:---:|:---:|:---:|:---:|
 | **End-Diastole (ED)** | **0.974** | **0.947** | 0.896 |
@@ -95,42 +100,50 @@ Our cascade classifier achieved an **overall accuracy of 97%**, significantly ou
 
 To set up the project environment, follow these steps:
 
-1.  **Clone the repository:**
+1. **Clone the repository:**
+
     ```bash
     git clone https://github.com/vitalii-slobodzian/cardiac-mri-analysis.git
     cd cardiac-mri-analysis
     ```
 
-2.  **Create and activate a virtual environment (Python 3.9+ recommended):**
+2. **Create and activate a virtual environment (Python 3.9+ recommended):**
+
     ```bash
     python -m venv venv
     source venv/bin/activate  # On Linux/macOS
     # venv\Scripts\activate  # On Windows
     ```
 
-3.  **Install the required dependencies:**
+3. **Install the required dependencies:**
+
     ```bash
     pip install -r requirements.txt
     ```
+
 ---
 
 ## Usage
 
 The entire pipeline can be run using simple CLI commands with YAML configuration files.
 
-1.  **Preprocess the Data**:
+1. **Preprocess the Data**:
     This script converts the raw ACDC NIFTI files into the required PNG format and folder structure.
+
     ```bash
     python dataset_builder.py --config configs/preprocessing.yaml
     ```
 
-2.  **Train the Models**:
+2. **Train the Models**:
     Train the segmentation and classification models using the specified configurations.
+
     ```bash
     python training.py --config configs/model.yaml
     ```
-3.  **Run Inference**:
+
+3. **Run Inference**:
     Perform segmentation and classification on a new patient's data.
+
     ```bash
     python inference.py --config configs/inference.yaml --patient_id <patient_id>
     ```
@@ -143,12 +156,13 @@ For more detailed examples and tutorials, please refer to the notebooks in the `
 
 This study was conducted using the **Automated Cardiac Diagnosis Challenge (ACDC) dataset**.
 
--   **Original Dataset**: To access the raw data, you must register at the [ACDC Challenge Website](https://www.creatis.insa-lyon.fr/Challenge/acdc/index.html).
--   **Pre-processed Dataset**: For convenience and full reproducibility, we have made our exact pre-processed dataset publicly available. This includes all training and testing splits used in the paper.
-    -   **[Download our Pre-processed Data (Google Drive)](https://drive.google.com/drive/folders/1qBpZR2LvrWwW70OLAJbOx74eWBlxtkA2?usp=sharing)**
+- **Original Dataset**: To access the raw data, you must register at the [ACDC Challenge Website](https://www.creatis.insa-lyon.fr/Challenge/acdc/index.html).
+- **Pre-processed Dataset**: For convenience and full reproducibility, we have made our exact pre-processed dataset publicly available. This includes all training and testing splits used in the paper.
+    - **[Download our Pre-processed Data (Google Drive)](https://drive.google.com/drive/folders/1qBpZR2LvrWwW70OLAJbOx74eWBlxtkA2?usp=sharing)**
 
 After running the preprocessing script, your `data/` directory will be structured as follows:
-```
+
+```markdown
 data/custom-dataset/
 ├── cropped/
 │   ├── training/
@@ -167,8 +181,9 @@ data/custom-dataset/
 ## Reproducibility
 
 We are committed to open and reproducible science.
--   All model configurations, hyperparameters, and training settings are defined in the YAML files within the `configs/` directory.
--   Trained model weights and checkpoints will be made available upon the final publication of the manuscript.
+
+- All model configurations, hyperparameters, and training settings are defined in the YAML files within the `configs/` directory.
+- Trained model weights and checkpoints will be made available upon the final publication of the manuscript.
 
 ---
 
@@ -199,6 +214,7 @@ Contributions are welcome! If you'd like to improve the code, report a bug, or s
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
 
 ## Acknowledgements
+
 We gratefully acknowledge the organizers of the ACDC Challenge for providing the public dataset and Khmelnytskyi National University for providing the computational resources necessary for this research.
 
 ## Contact
