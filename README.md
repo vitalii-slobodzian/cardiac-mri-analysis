@@ -1,9 +1,3 @@
-Of course. I will refactor the `README.md` to be more professional, visually engaging, and closely synchronized with the research manuscript. I will enhance the text, add key visuals that provide context beyond the paper, and structure the information for clarity and ease of use by other researchers and developers.
-
-Here is the enhanced `README.md`:
-
----
-
 # Explainable Deep Learning for Cardiac MRI Analysis
 
 [![Paper](https://img.shields.io/badge/Preprint-10.20944/preprints202501.1280.v1-green)](https://doi.org/10.20944/preprints202501.1280.v1)
@@ -151,7 +145,7 @@ This study was conducted using the **Automated Cardiac Diagnosis Challenge (ACDC
 
 -   **Original Dataset**: To access the raw data, you must register at the [ACDC Challenge Website](https://www.creatis.insa-lyon.fr/Challenge/acdc/index.html).
 -   **Pre-processed Dataset**: For convenience and full reproducibility, we have made our exact pre-processed dataset publicly available. This includes all training and testing splits used in the paper.
-    -   **[Download our Pre-processed Data (OneDrive)](https://1drv.ms/u/c/9af290d8743a02e1/ET0Wpvae1XpGgkekVoOhifIBohZrgOZi1-bUIQzgJLxuNQ?e=SC7We1)**
+    -   **[Download our Pre-processed Data (Google Drive)](https://drive.google.com/drive/folders/1qBpZR2LvrWwW70OLAJbOx74eWBlxtkA2?usp=sharing)**
 
 After running the preprocessing script, your `data/` directory will be structured as follows:
 ```
