@@ -4,6 +4,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Python Version](https://img.shields.io/badge/Python-3.9+-brightgreen.svg)](https://www.python.org/downloads/)
 [![Code Style: Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![CI](https://github.com/vitalii-slobodzian/cardiac-mri-analysis/actions/workflows/ci.yml/badge.svg)](https://github.com/vitalii-slobodzian/cardiac-mri-analysis/actions/workflows/ci.yml)
 
 This repository contains the official implementation for the paper **"Explainable Deep Learning for Cardiac MRI: Multi-Stage Segmentation, Cascade Classification, and Visual Interpretation"**. Our work introduces a complete framework for automated, accurate, and transparent analysis of cardiac MRI scans, bridging the gap between advanced deep learning models and clinical interpretability.
 
@@ -109,19 +110,33 @@ To set up the project environment, follow these steps:
     cd cardiac-mri-analysis
     ```
 
-2. **Create and activate a virtual environment (Python 3.9+ recommended):**
+2. **Choose an environment option (Python 3.9+):**
 
-    ```bash
-    python -m venv venv
-    source venv/bin/activate  # On Linux/macOS
-    # venv\Scripts\activate  # On Windows
-    ```
+   - Using Conda (recommended for scientific stacks):
 
-3. **Install the required dependencies:**
+     ```bash
+     conda create -n cardio-mri python=3.9 -y
+     conda activate cardio-mri
+     # Core deps (current subset used by segmentation code)
+     pip install -r segmentation/requirements.txt
+     # Dev tools
+     pip install black pytest jupyterlab
+     ```
 
-    ```bash
-    pip install -r requirements.txt
-    ```
+   - Using venv (standard Python):
+
+     ```bash
+     python -m venv .venv
+     # Linux/macOS
+     source .venv/bin/activate
+     # Windows (PowerShell)
+     .venv\Scripts\Activate.ps1
+     # Install dependencies
+     pip install -r segmentation/requirements.txt
+     pip install black pytest jupyterlab
+     ```
+
+3. **Optional: verify GPU setup** (if using CUDA-enabled PyTorch). Ensure your CUDA/PyTorch versions are compatible; otherwise the project runs on CPU.
 
 ---
 
@@ -153,6 +168,40 @@ The entire pipeline can be run using simple CLI commands with YAML configuration
 For more detailed examples and tutorials, please refer to the notebooks in the `examples/` directory.
 
 ---
+
+## Development Guide
+
+Follow these steps when developing locally.
+
+1. Format code with Black:
+
+   ```bash
+   black .
+   ```
+
+2. Run tests with Pytest:
+
+   ```bash
+   pytest -q
+   ```
+
+   The repository includes example unit tests under `tests/` covering:
+   - `DiceMetric.multi_dice` computation for perfect and partial overlap
+   - `NiiReader.parse_config` parsing of typical ACDC metadata
+
+3. Work with notebooks:
+
+   ```bash
+   jupyter lab
+   ```
+
+   Prefer lightweight, deterministic cells; avoid committing large outputs.
+
+4. Continuous Integration (CI):
+
+   - Every push/PR to `main` or `develop` runs GitHub Actions: `black --check .` and `pytest -q`.
+   - Fix formatting locally with `black .` and ensure tests pass before opening a PR.
+   - CI uses pip caching and pinned deps from `segmentation/requirements.txt` (e.g., `torch==2.5.1`, `torchvision==0.20.1`, `fastai==2.7.18`) for reproducibility and faster builds.
 
 ## Dataset
 
