@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 import numpy as np
+from style import apply_mpl_defaults, seed_everything
 
 from fig_calibration import generate as gen_calib
 from fig_dice import generate as gen_dice
@@ -28,7 +29,8 @@ def main() -> None:
     outdir = Path(args.outdir)
     outdir.mkdir(parents=True, exist_ok=True)
 
-    np.random.seed(1234)
+    apply_mpl_defaults()
+    seed_everything(1234)
 
     if args.which in ("all", "calibration"):
         gen_calib(outdir)

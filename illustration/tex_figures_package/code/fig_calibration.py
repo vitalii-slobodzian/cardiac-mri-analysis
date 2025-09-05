@@ -1,41 +1,22 @@
-# -*- coding: utf-8 -*-
+#! -*- coding: utf-8 -*-
 from __future__ import annotations
 
-import math
 from dataclasses import dataclass
 from pathlib import Path
 from typing import List, Tuple
 
 import numpy as np
-import matplotlib as mpl
 import matplotlib.pyplot as plt
-from PIL import Image, PngImagePlugin
 
-mpl.rcParams.update({
-    "font.family": "sans-serif",
-    "font.sans-serif": ["Helvetica", "Arial", "DejaVu Sans"],
-    "axes.spines.top": False,
-    "axes.spines.right": False,
-    "axes.grid": True,
-    "grid.alpha": 0.25,
-})
+from style import OI, apply_mpl_defaults, mm_to_inches, save_figure_dual, seed_everything
 
-OI = {
-    "black": "#000000",
-    "orange": "#E69F00",
-    "sky_blue": "#56B4E9",
-    "bluish_green": "#009E73",
-    "yellow": "#F0E442",
-    "blue": "#0072B2",
-    "vermillion": "#D55E00",
-    "reddish_purple": "#CC79A7",
-}
 
 @dataclass
 class CalibSpec:
     name: str
     ece: float
     mce: float
+
 
 def build_bins_for_targets(
     ece_target: float,
@@ -69,12 +50,6 @@ def build_bins_for_targets(
     assert abs(mce - mce_target) < 1e-6, (mce, mce_target)
     return conf, acc, weights
 
-def _save_with_png_metadata(fig_path: Path, meta: dict) -> None:
-    img = Image.open(fig_path)
-    pnginfo = PngImagePlugin.PngInfo()
-    for k, v in meta.items():
-        pnginfo.add_text(k, str(v))
-    img.save(fig_path, "PNG", pnginfo=pnginfo)
 
 def plot_reliability_grid(
     out_png: Path,
@@ -83,13 +58,21 @@ def plot_reliability_grid(
     fig_width_mm: float = 180.0,
     fig_height_mm: float = 110.0,
 ) -> None:
-    w_in = fig_width_mm / 25.4
-    h_in = fig_height_mm / 25.4
-    fig, axes = plt.subplots(2, 2, figsize=(w_in, h_in), constrained_layout=True)
+    fig, axes = plt.subplots(2, 2, figsize=mm_to_inches(fig_width_mm, fig_height_mm), constrained_layout=True)
 
     for ax, spec in zip(axes.ravel(), specs):
         conf, acc, _ = build_bins_for_targets(spec.ece, spec.mce, n_bins=10)
-        ax.bar(conf, acc, width=0.09, align="center", color=OI["sky_blue"], edgecolor="none", label="Accuracy (per bin)")
+
+        # bars for accuracy, diagonal and confidence overlay
+        ax.bar(
+            conf,
+            acc,
+            width=0.09,
+            align="center",
+            color=OI["sky_blue"],
+            edgecolor="none",
+            label="Accuracy (per bin)",
+        )
         ax.plot(conf, conf, color=OI["vermillion"], linewidth=2.0, label="Mean confidence")
         xs = np.linspace(0.0, 1.0, 256)
         ax.plot(xs, xs, color=OI["black"], linewidth=1.0, alpha=0.5, linestyle="--")
@@ -99,29 +82,33 @@ def plot_reliability_grid(
         ax.set_ylabel("Accuracy")
         ax.set_title(spec.name)
         ax.text(
-            0.98, 0.05, f"ECE={spec.ece:.3f}\nMCE={spec.mce:.3f}",
-            ha="right", va="bottom", fontsize=9,
+            0.98,
+            0.05,
+            f"ECE={spec.ece:.3f}\nMCE={spec.mce:.3f}",
+            ha="right",
+            va="bottom",
+            fontsize=9,
             bbox=dict(facecolor="white", alpha=0.8, edgecolor="none", boxstyle="round,pad=0.2"),
         )
-    handles, labels = axes.ravel()[0].get_legend_handles_labels()
-    fig.legend(handles, labels, ncols=2, loc="upper center", frameon=False)
 
-    out_png.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(out_png, dpi=300)
-    _save_with_png_metadata(out_png, {
-        "Figure": "Calibration reliability 2x2",
-        "Generator": "fig_calibration.py",
-        "Timestamp": str(np.datetime64('now')),
-        "Version": "1.0",
-    })
-    fig.savefig(out_pdf, dpi=300, metadata={
-        "Title": "Calibration reliability diagrams (2×2)",
-        "Author": "TeX-Figures-Refinement",
-        "Subject": "ECE/MCE-aligned reliability diagrams",
-    })
-    plt.close(fig)
+    handles, labels = axes.ravel()[0].get_legend_handles_labels()
+    if handles:
+        plt.legend(handles, labels, ncols=2, loc="upper center", frameon=False)
+
+    save_figure_dual(
+        plt.gcf(),
+        out_png,
+        out_pdf,
+        title="Calibration reliability 2x2",
+        subject="ECE/MCE-aligned reliability diagrams",
+        generator="fig_calibration.py",
+        version="1.1",
+    )
+
 
 def generate(out_dir: Path) -> None:
+    apply_mpl_defaults()
+    seed_everything(1234)
     specs = [
         CalibSpec("Stage 1", ece=0.021, mce=0.045),
         CalibSpec("Stage 2", ece=0.008, mce=0.015),
@@ -131,8 +118,12 @@ def generate(out_dir: Path) -> None:
     plot_reliability_grid(
         out_png=out_dir / "calibration_reliability.png",
         out_pdf=out_dir / "calibration_reliability.pdf",
-        specs=specs, fig_width_mm=180.0, fig_height_mm=110.0
+        specs=specs,
+        fig_width_mm=180.0,
+        fig_height_mm=110.0,
     )
+
 
 if __name__ == "__main__":
     generate(Path(__file__).resolve().parents[1] / "figures")
+

@@ -60,6 +60,11 @@ python code/generate_all_figures.py --which sota
 python code/generate_all_figures.py --which external
 ```
 
+### Jupyter (one-click)
+
+- Open `illustration/tex_figures_package/Run_All_Figures.ipynb` and run the single code cell.  
+  This executes the same command as above and writes outputs into `figures/`.
+
 ## LaTeX Integration (wlscirep)
 
 - Copy `figures/` into your LaTeX project. For convenient path lookup, add to your preamble:
@@ -99,7 +104,8 @@ python code/generate_all_figures.py --which external
 ## Determinism
 
 - A global random seed is set (`numpy.random.seed`), and layout parameters are fixed to make outputs stable.
-- PNGs include metadata (generator, timestamp, version). PDFs include document metadata via `savefig`.
+- PNGs include metadata (generator, timestamp, version). PDFs include document metadata via `savefig`.  
+- SVG companions are also written to match vector-friendly `.ipynb` outputs.
 
 ## Self‑evaluation
 
