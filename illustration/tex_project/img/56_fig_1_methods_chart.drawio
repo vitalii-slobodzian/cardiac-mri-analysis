@@ -1,0 +1,49 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36" border="50" scale="3" compressed="false" locked="false" version="26.0.6">
+  <diagram name="Blank" id="YmL12bMKpDGza6XwsDPr">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" background="none" math="1" shadow="0">
+      <root>
+        <mxCell id="X5NqExCQtvZxIxQ7pmgY-0" />
+        <mxCell id="1" parent="X5NqExCQtvZxIxQ7pmgY-0" />
+        <mxCell id="oND68mjcGfQAcXZ-Ucve-13" value="&lt;span style=&quot;font-style: italic; font-weight: 700; text-wrap-mode: nowrap;&quot;&gt;&lt;font&gt;Input&lt;/font&gt;&lt;/span&gt;" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="90" y="370" width="130" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="oND68mjcGfQAcXZ-Ucve-14" value="&lt;span style=&quot;font-style: italic; font-weight: 700; text-wrap-mode: nowrap;&quot;&gt;&lt;font&gt;Processing&lt;/font&gt;&lt;/span&gt;" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=14;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="210" y="370" width="370" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="oND68mjcGfQAcXZ-Ucve-15" value="&lt;span style=&quot;font-style: italic; font-weight: 700; text-wrap-mode: nowrap;&quot;&gt;&lt;font&gt;Output&lt;/font&gt;&lt;/span&gt;" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="570" y="370" width="130" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="oND68mjcGfQAcXZ-Ucve-16" value="" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fontSize=13;fillColor=#dae8fc;strokeColor=#6c8ebf;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="90" y="430" width="130" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="oND68mjcGfQAcXZ-Ucve-17" value="" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fontSize=13;fillColor=#ffe6cc;strokeColor=#d79b00;verticalAlign=top;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="210" y="430" width="130" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="oND68mjcGfQAcXZ-Ucve-18" value="" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fontSize=13;fillColor=#ffe6cc;strokeColor=#d79b00;verticalAlign=top;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="330" y="430" width="130" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="oND68mjcGfQAcXZ-Ucve-19" value="" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fontSize=13;fillColor=#ffe6cc;strokeColor=#d79b00;verticalAlign=top;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="450" y="430" width="130" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="oND68mjcGfQAcXZ-Ucve-20" value="" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fontSize=13;fillColor=#d5e8d4;strokeColor=#82b366;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="570" y="430" width="130" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="l7_SaR5WOaeRy0ciTCHh-1" value="&lt;span&gt;&lt;b style=&quot;text-wrap-mode: nowrap;&quot;&gt;Stage&amp;nbsp;&lt;/b&gt;&lt;span style=&quot;font-weight: 700; text-wrap-mode: nowrap;&quot;&gt;3&lt;/span&gt;&lt;/span&gt;&lt;span style=&quot;text-wrap-mode: nowrap; font-weight: 700;&quot;&gt;:&lt;/span&gt;&lt;div&gt;&lt;font&gt;&lt;span style=&quot;text-wrap-mode: nowrap;&quot;&gt;Interpretation of&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font&gt;&lt;span style=&quot;text-wrap-mode: nowrap;&quot;&gt;decisions made&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="460" y="430" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="l7_SaR5WOaeRy0ciTCHh-2" value="&lt;i&gt;&lt;span style=&quot;text-wrap-mode: nowrap;&quot;&gt;Predicted classes&lt;/span&gt;&lt;br style=&quot;text-wrap-mode: nowrap;&quot;&gt;&lt;span style=&quot;text-wrap-mode: nowrap;&quot;&gt;and interpretation&lt;/span&gt;&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="580" y="430" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="l7_SaR5WOaeRy0ciTCHh-3" value="&lt;font&gt;&lt;span style=&quot;text-wrap-mode: nowrap;&quot;&gt;&lt;i&gt;MRI&lt;/i&gt;&lt;/span&gt;&lt;/font&gt;&lt;div&gt;&lt;font&gt;&lt;span style=&quot;text-wrap-mode: nowrap;&quot;&gt;&lt;i&gt;scans&lt;/i&gt;&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="90" y="430" width="130" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="l7_SaR5WOaeRy0ciTCHh-5" value="&lt;b style=&quot;text-wrap-mode: nowrap;&quot;&gt;&lt;span&gt;Stage&amp;nbsp;&lt;/span&gt;&lt;/b&gt;&lt;span style=&quot;text-wrap-mode: nowrap;&quot;&gt;&lt;b&gt;&lt;span&gt;2&lt;/span&gt;:&lt;/b&gt;&lt;br&gt;&lt;/span&gt;&lt;div&gt;&lt;div&gt;&lt;font&gt;&lt;span style=&quot;text-wrap-mode: nowrap;&quot;&gt;Classification of&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font&gt;&lt;span style=&quot;text-wrap-mode: nowrap;&quot;&gt;cardiac MRI&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="340" y="430" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="l7_SaR5WOaeRy0ciTCHh-6" value="&lt;span style=&quot;text-wrap-mode: nowrap;&quot;&gt;&lt;span&gt;&lt;b&gt;&lt;span&gt;Stage 1&lt;/span&gt;:&lt;/b&gt;&lt;/span&gt;&lt;/span&gt;&lt;div&gt;&lt;font&gt;&lt;span style=&quot;text-wrap-mode: nowrap;&quot;&gt;Segmentation of&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font&gt;&lt;span style=&quot;text-wrap-mode: nowrap;&quot;&gt;cardiac MRI&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="220" y="430" width="120" height="80" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
